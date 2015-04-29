@@ -5,7 +5,7 @@
 	use phpish\template;
 
     require __DIR__.'/path.config.php';
-	require __DIR__.'/conf/'.app\ENV.'.conf.php';
+	require __DIR__.'/conf/conf.php';
 
     include_once MODELS_DIR . "session.php";
     include_once MODELS_DIR . "util.php";
@@ -39,9 +39,17 @@
     function meekrodb_setup()
     {
         include_once MEEKRODB_PATH.'db.class.php';
-        DB::$user = DB_USER;
-        DB::$password = DB_PASSWORD;
-        DB::$dbName = DB_DATABASE_NAME;
+
+        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+        $server = $url["host"];
+        $username = $url["user"];
+        $password = $url["pass"];
+        $db = substr($url["path"], 1);
+        
+        DB::$user = $username;
+        DB::$password = $password;
+        DB::$dbName = $db;
+        DB::$host = $server;
         DB::$encoding = 'utf8';
         DB::$error_handler = false;
         DB::$throw_exception_on_error = true;
