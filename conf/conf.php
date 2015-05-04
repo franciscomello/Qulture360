@@ -1,5 +1,5 @@
 <?php
-define('EMAIL_USER_NAME', 'email_user_name');
-define('EMAIL_PWD', 'email_password');
+define('EMAIL_USER_NAME', 'kiko@qulture.rocks');
+define('EMAIL_PWD', 'qulture.rocks');
 ?>
 
