@@ -39,7 +39,7 @@ $competencies = $data['competencies'];
                 </div>
 
                 <div class="3u 12u$(medium) form-label"><label>Competencies<sup>*</sup></label></div>
-                <div class="9u$ 12u$(medium)">
+                <div class="9u$ 12u$(medium)" id="competencies-list">
                     <?php foreach($competencies as $competency) {
                         $unique_id = "competency_".$competency['id'];
                         ?>
@@ -49,8 +49,19 @@ $competencies = $data['competencies'];
                         </div>
                     <?php } ?>
                 </div>
+                
+                <div class="3u 12u$(medium) form-label"><label>Add Custom competency</label></div>
+                <div class="9u$ 12u$(medium)">
+                    <input type="text" name="new-name" id="new-name" placeholder="Name" minlength="2">
+                </div>
+                 <div class="3u 12u$(medium) form-label"><label></label></div>
+                <div class="9u$ 12u$(medium)">
+                    <textarea name="new-description" id="new-description" placeholder="Description"></textarea>
+                </div>
 
-                <div class="3u 12u$(medium) form-label"><label><sup>*</sup></label></div>
+                <div class="add-new" style="float: right;"><input type="button" value="Add" class="button special" onclick="addCustomCompetency()"></div>
+
+                <div class="3u 12u$(medium) form-label" style="clear: both;"><label><sup>*</sup></label></div>
                 <div class="9u$ 12u$(medium)">
                     <input type="checkbox" id="aggregated_score" name="aggregated_score" value="yes" checked>
                     <label class="checkbox-label" for="aggregated_score">Display only aggregated score per competency to Reviewee</label>
@@ -78,6 +89,21 @@ $competencies = $data['competencies'];
             }));
         });
     });
+
+    function addCustomCompetency() {
+        var competencyName = $('#new-name').val();
+        var competencyDescription = $('#new-description').val();
+        if(competencyName != '') {
+            $.ajax({
+                type: 'POST',
+                url: '/survey/add-new',
+                data: 'name='+competencyName+'&description='+competencyDescription,
+                success: function(data) {
+                    location.reload();
+                }
+            });
+        }
+    }
 </script>
 
 

@@ -7,11 +7,11 @@
         <li><a href="https://github.com/nashjain/feedback360" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
         <li><a href="mailto:naresh@feedback360.co" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
     </ul>
-    <ul class="copyright">
+    <!-- <ul class="copyright">
         <li>&copy; Naresh Jain. All rights reserved.</li>
         <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
         <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-    </ul>
+    </ul> -->
 </footer>
 
 </body>

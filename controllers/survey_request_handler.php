@@ -55,6 +55,10 @@ app\post("/survey/create", function ($req) {
     return template\compose("survey/assign_reviewers.html", compact('data'), "layout.html");
 });
 
+app\post("/survey/add-new", function ($req) {
+    return Competencies::add_new($_POST['name'], $_POST['description']);
+});
+
 app\any("/survey/{id}/[overview|add-reviewers|edit-reviewers|reviewee/{reviewee_name}]", function ($req) {
     $survey_id = $req['matches']['id'];
     if(!Survey::is_owned_by($survey_id)){
