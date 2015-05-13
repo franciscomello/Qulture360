@@ -1476,6 +1476,11 @@
 			top: 0;
 		}
 
+		#logo img {
+			height: 40px;
+			margin-top: 10px;
+		}
+
 		#header nav {
 			position: absolute;
 			right: 1em;

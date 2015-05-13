@@ -1,5 +1,5 @@
 <header id="header">
-    <h1 id="logo"><a href="/">Feedback 360&deg;</a></h1>
+    <h1 id="logo"><a href="/"><img src="/static/images/logo.png" alt="Qulture.Rocks"/></a></h1>
     <nav id="nav">
         <ul>
             <li>
