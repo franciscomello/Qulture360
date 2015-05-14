@@ -1,3 +1,6 @@
+<script>
+ $('body').addClass('landing');
+</script>
 <!-- Banner -->
 <section id="banner">
     <div class="content">

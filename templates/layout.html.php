@@ -1,5 +1,5 @@
 <?php include_once TEMPLATE_PATH."inc/header.html.php"; ?>
-<body class="landing">
+<body>
 <?php include_once TEMPLATE_PATH."inc/menu.html.php"; ?>
 <div id='session_alert_msgs'><?php echo display_flash_msg()?></div>
 <?php echo $content; ?>
