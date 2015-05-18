@@ -10,12 +10,12 @@ function mailer_setup()
     return Swift_Mailer::newInstance($transport);
 }
 
-function send_mail($details, $objective, $conf_details=['email_address'=>'naresh@feedback360.co','name_in_email'=>'Feedback360'])
+function send_mail($details, $objective, $conf_details=['email_address'=>'TeamHelp@qulture.rocks','name_in_email'=>'Feedback360'])
 {
     if(is_string($details['email'] and !($objective=='registration' or $objective=='email_verification'))){
         include_once MODELS_DIR . "email.php";
         if(Email::is_not_active($details['email'])){
-            $details = ['email'=>'naresh@feedback360.co', 'name'=>'Feedback360', 'subject'=>'Did not send email to un-subscribed user', 'message'=> "Can not send $objective email to un-subscribed email: ".$details['email']];
+            $details = ['email'=>'TeamHelp@qulture.rocks', 'name'=>'Qulture.Rocks', 'subject'=>'Did not send email to un-subscribed user', 'message'=> "Can not send $objective email to un-subscribed email: ".$details['email']];
             $objective = 'unsub_notification';
         }
     }
@@ -48,7 +48,7 @@ function send_mail($details, $objective, $conf_details=['email_address'=>'naresh
     $conf_self = [$conf_details['email_address'] => $conf_details['name_in_email']];
     $message = Swift_Message::newInstance('Feedback360')
         ->setSubject($subject)
-        ->setFrom(['naresh@feedback360.co' => 'Feedback360'])
+        ->setFrom(['TeamHelp@qulture.rocks' => 'Qulture.Rocks'])
         ->setReplyTo($conf_self)
         ->setBody($message_body, 'text/html');
 
@@ -123,7 +123,7 @@ function email_footer($email)
     return "<br /><br />
             Regards,<br />
             Feedback360 Team<br />
-            <a href='mailto:naresh@feedback360.co'>naresh@feedback360.co</a><br/>
+            <a href='mailto:TeamHelp@qulture.rocks'>TeamHelp@qulture.rocks</a><br/>
             <a href='http://feedback360.co'>http://feedback360.co</a><br />
             <div style='font-size:10px;margin-top:10px;'>You are receiving this email from Feedback360.
 			Thanks for using Feedback360. $unsublink</div>
