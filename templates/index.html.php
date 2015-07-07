@@ -89,7 +89,7 @@
                 <div class="4u$ 12u$(medium)">
                     <ol>
                         <li>From the overall list of competencies, as a team, decide which 5-7 competencies matters the most to your team</li>
-                        <li>Discuss a few examples of how to give effective feedback via "Strengthen Confidence" and "Increase Effectiveness" sections</li>
+                        <li>Discuss a few examples of how to give effective feedback via "Positive examples" and "Needs improvement" sections</li>
                         <li>Before rolling-it out, as a team agree by when you want to complete the reviews</li>
                         <li>Conduct a retrospective on how the 360 Feedback worked, Inspect and Adapt.</li>
                     </ol>

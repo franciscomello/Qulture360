@@ -50,3 +50,19 @@ app\get("/user/{username}", function($req) {
     }
     return template\compose("user/profile.html", compact('data'), "layout.html");
 });
+
+app\post("/user/check_member_email", function($req) {
+    $response = array();
+    $response['result'] = 'ok';
+    $response['exist'] = 'no';
+    $response['user_data'] = array();
+    $email = $req['form']['email'];
+    if(!empty($email)){
+        $response['user_data'] = User::fetch_user_details('email', $email, "*");
+        if (count($response['user_data'])>0){
+            $response['exist'] = 'yes';
+        }
+    }
+    return json_encode($response);
+});
+

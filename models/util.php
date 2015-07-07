@@ -36,6 +36,9 @@ class Util
             $name_email_str = str_replace(" <", "<", trim($member));
             $name_email_str = str_replace(" (", "<", $name_email_str);
             $name_email = explode("<", $name_email_str);
+            if (count($name_email)<2){
+                continue;
+            }
             $email = str_replace(">", "", trim($name_email[1]));
             $name_without_double_quotes = trim($name_email[0], '"');
             $name = addslashes($name_without_double_quotes);

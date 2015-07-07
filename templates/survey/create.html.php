@@ -45,7 +45,10 @@ $competencies = $data['competencies'];
                         ?>
                         <div class="12u$ 12u$(medium)">
                             <input type="checkbox" id="<?php echo $unique_id; ?>" name="competencies[]" value="<?php echo $competency['id']; ?>" checked="">
-                            <label class="checkbox-label" for="<?php echo $unique_id; ?>"><b><?php echo $competency['name']; ?></b><br/><?php echo $competency['description']; ?></label>
+                            <label class="checkbox-label" for="<?php echo $unique_id; ?>"><b><?php echo $competency['name']; ?></b>
+                                <br/><?php echo $competency['description']; ?>
+                                <br><a href="<?php echo BASE_URL;?>survey/competency/<?php echo $competency['id'];?>/edit">Edit the grading field texts about <?php echo $competency['name']; ?></a>
+                            </label>
                         </div>
                     <?php } ?>
                 </div>

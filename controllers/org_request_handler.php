@@ -41,7 +41,7 @@ app\post("/org/create", function ($req) {
         set_flash_msg('error', $response);
     else
         set_flash_msg('success', 'Successfully created your organisation');
-    return app\response_302($req['form']['requested_url']);
+    return app\response_302(BASE_URL.$req['form']['requested_url']);
 });
 
 app\any("/org/{org_id}/[delete[/yes]|team[/.*]]", function ($req) {
@@ -125,7 +125,7 @@ app\get("/org/{org_id}/team/{team_id}/member/{username}/delete", function ($req)
     $team_id = $req['matches']['team_id'];
     $username = $req['matches']['username'];
     $member_name = query_param($req, 'name');
-    $data = ['title'=>"Deleting your member: $member_name...", 'ok_url'=>"/org/$org_id/team/$team_id/member/$username/delete/yes", 'cancel_url'=>"/org/$org_id/team/$team_id", 'msg'=>'Are you sure you want to remove the user from your team? This operation cannot be undone. <br/>All pending reviews will be deleted. Existing reviews will remain as is.'];
+    $data = ['title'=>"Deleting your member: $member_name...", 'ok_url'=>BASE_URL."org/$org_id/team/$team_id/member/$username/delete/yes", 'cancel_url'=>BASE_URL."org/$org_id/team/$team_id", 'msg'=>'Are you sure you want to remove the user from your team? This operation cannot be undone. <br/>All pending reviews will be deleted. Existing reviews will remain as is.'];
     return template\compose("org/confirmation.html", compact('data'), "layout.html");
 });
 
@@ -162,6 +162,21 @@ app\get("/org/{org_id}/team/{team_id}/member/add", function ($req) {
     $team_name = query_param($req, 'name');
     $data = ['org_id'=>$org_id, 'team_id'=>$team_id, 'team_name'=>$team_name];
     return template\compose("org/add_team_members.html", compact('data'), "layout.html");
+});
+
+app\post("/org/{org_id}/team/{team_id}/member/add/from_survey/{survey_id}", function ($req) {
+    $org_id = $req['matches']['org_id'];
+    $team_id = $req['matches']['team_id'];
+    $survey_id = $req['matches']['survey_id'];
+    $email = $req['form']['email'];
+    $name = $req['form']['name']; 
+    $emulate_form = array();
+    $emulate_form['stakeholders'] = '';
+    $emulate_form['team_members'] = $name.' <'.$email.'>';
+    $response = Team::add_members($emulate_form, $team_id, $org_id);
+    if ('success'!= $response)
+        set_flash_msg('error', $response);
+    return app\response_302(BASE_URL."survey/$survey_id/edit-reviewers");
 });
 
 app\post("/org/{org_id}/team/{team_id}/member/add", function ($req) {

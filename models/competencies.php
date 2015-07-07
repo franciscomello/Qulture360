@@ -16,4 +16,22 @@ class Competencies
     {
     	return DB::query("INSERT INTO `competencies` (`name`, `description`, `owner_name`) VALUES ('".$name."', '".$description."', '".Session::username()."')");
     }
+
+    public static function get_full_data($competency_id){
+      $response = array();
+      $response['base_data'] = DB::queryFirstRow("SELECT * FROM `competencies` WHERE id = $competency_id");
+      $response['custom_grading'] = DB::query("SELECT * FROM competencies_grading WHERE competency_id = $competency_id ORDER BY grade_position ASC");
+      return $response;
+    }
+
+    public static function delete_competency_grades($competency_id){
+        return DB::query("DELETE FROM `competencies_grading` WHERE competency_id = $competency_id");
+    }
+
+    public static function update_competency_grades($competency_id, $grades){
+        self::delete_competency_grades($competency_id);
+        foreach ($grades as $grade_position => $grade_text) {
+            DB::query("INSERT INTO `competencies_grading` (`competency_id`,`grade_position`,`grade_text`) VALUES ( $competency_id, $grade_position, '$grade_text' ) ");
+        }
+    }
 }

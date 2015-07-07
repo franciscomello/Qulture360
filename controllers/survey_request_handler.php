@@ -39,6 +39,32 @@ app\get("/survey/create", function ($req) {
     return template\compose("survey/create.html", compact('data'), "layout.html");
 });
 
+app\get("/survey/competency/{competency_id}/edit", function ($req) {
+    $competency_id = $req['matches']['competency_id'];
+    $data = ['competency_data' => Competencies::get_full_data($competency_id), 'default_grading' => Review::$ratings];
+    return template\compose("survey/manage_competency_grading.html", compact('data'), "layout.html");
+});
+
+app\post("/survey/competency/{competency_id}/edit", function ($req) {
+    $competency_id = $req['matches']['competency_id'];
+    if (isset($req['form']['enable_default_grading'])){
+        Competencies::delete_competency_grades($competency_id);
+    }else{
+        //update, create
+        $grades = array();
+        $grades[0] = $req['form']['grade_0_field'];
+        $grades[1] = $req['form']['grade_1_field'];
+        $grades[2] = $req['form']['grade_2_field'];
+        $grades[3] = $req['form']['grade_3_field'];
+        $grades[4] = $req['form']['grade_4_field'];
+        $grades[5] = $req['form']['grade_5_field'];
+        Competencies::update_competency_grades($competency_id,$grades);
+    }
+    set_flash_msg('success', 'Competencies Grading Updated');
+    $data = ['competency_data' => Competencies::get_full_data($competency_id), 'default_grading' => Review::$ratings];
+    return template\compose("survey/manage_competency_grading.html", compact('data'), "layout.html");
+});
+
 app\post("/survey/create", function ($req) {
     $response = Survey::create($req['form']);
     if($response['status']!='success') {

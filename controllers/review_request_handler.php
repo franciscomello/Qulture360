@@ -3,6 +3,8 @@
 use phpish\app;
 use phpish\template;
 
+
+include_once MODELS_DIR . 'competencies.php';
 include_once MODELS_DIR . 'review.php';
 include_once MODELS_DIR . 'feedback.php';
 
@@ -49,6 +51,10 @@ app\get("/review/give/{id}", function ($req) {
     if(empty($competencies)){
         set_flash_msg('error', 'Sorry! There are no competencies identified for giving feedback. Please contact your manager.');
         return app\response_302(BASE_URL."review/pending");
+    }else{
+        foreach ($competencies as $key => $a_comp) {
+            $competencies[$key]['full_data'] = Competencies::get_full_data($a_comp['competency_id']);
+        }
     }
     $reviewee_name = Review::fetch_reviewee_name_for($review_id);
     $data = ['competencies'=> $competencies, 'ratings'=> Review::$ratings, 'reviewee_name'=>$reviewee_name, 'title'=>'Give', 'post_url'=>BASE_URL.'review/give/'.$review_id, 'cancel_url'=>BASE_URL.'review/pending'];
@@ -64,6 +70,11 @@ app\get("/review/update/{id}", function ($req) {
     }
     $additional_data = ['ratings'=> Review::$ratings, 'title'=>'Update', 'post_url'=>BASE_URL.'review/update/'.$review_id, 'cancel_url'=>BASE_URL.'review/given'];
     $data = array_merge($data, $additional_data);
+    $competencies = $data['competencies'];
+    foreach ($competencies as $key => $a_comp) {
+        $competencies[$key]['full_data'] = Competencies::get_full_data($a_comp['competency_id']);
+    }
+    $data['competencies'] = $competencies;
     return template\compose("review/give_feedback.html", compact('data'), "layout.html");
 });
 

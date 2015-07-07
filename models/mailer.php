@@ -86,7 +86,9 @@ function send_mail($details, $objective, $conf_details=['email_address'=>'TeamHe
 
 function build_registration_message($user_details, $email_activation_only = false)
 {
-    $activation_url = "http://" . $_SERVER['HTTP_HOST'] . "/auth/email-confirmation?email=" . $user_details['email'] . "&activation_token=" . $user_details['activation_token'];
+    //$activation_url = BASE_URL. "/auth/email-confirmation?email=" . $user_details['email'] . "&activation_token=" . $user_details['activation_token'];
+    $activation_url = BASE_URL. "auth/email-confirmation?email=" . $user_details['email'] . "&activation_token=" . $user_details['activation_token'];
+    
     if ($email_activation_only)
         return 'Verify your new email address by clicking on this link: <a href="' . $activation_url . '"> ' . $activation_url . ' </a>';
     return 'Welcome aboard, to the <b>Feedback360 System</b>. <br />
@@ -100,14 +102,14 @@ function build_registration_message($user_details, $email_activation_only = fals
 
 function build_new_review_message()
 {
-    $review_url = "http://" . $_SERVER['HTTP_HOST'] . "/review/pending";
+    $review_url = BASE_URL. "review/pending";
     return 'A new review has been assigned to you in <b>Feedback360 System</b>. <br /><br />
         To get started, please click on this link: <a href="' . $review_url . '"> ' . $review_url . ' </a>';
 }
 
 function build_password_recovery_message($user_details, $action)
 {
-    $activation_url = "http://" . $_SERVER['HTTP_HOST'] . "/auth/" . $action . "?email=" . $user_details['email'] . "&activation_token=" . $user_details['activation_token'];
+    $activation_url = BASE_URL. "auth/" . $action . "?email=" . $user_details['email'] . "&activation_token=" . $user_details['activation_token'];
     return 'Your account is safe with us, the following is the requested password recovery link to reset your account&#39;s password on Feedback360.<br/>
             <br/>
             To reset your password, Click on this <a href="' . $activation_url . '">reset password link</a><br/><br/> OR<br/><br/> Copy and Paste this link in your browser window,<br/><br/> &nbsp;&nbsp; <b><i>' . $activation_url . '</b></i>

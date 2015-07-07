@@ -21,17 +21,28 @@ $reviewee_name = $data['reviewee_name'];
                     <div class="9u$ 12u$(medium)">
                         <div class="select-wrapper">
                             <select name="<?php echo $rating_id?>" id="<?php echo $rating_id?>">
-                                <?php echo build_options_from_map($data['ratings'], $competency['rating']); ?>
+                                <?php
+                                    $custom_ratings = $competency['full_data']['custom_grading'];
+                                    if (count($custom_ratings)<6){
+                                       $ratings_for_options = $data['ratings'];
+                                    }else{
+                                        $ratings_for_options = array();
+                                        foreach ($custom_ratings as $key => $value) {
+                                          $ratings_for_options[$value['grade_position']] = $value['grade_text']; 
+                                        }
+                                    }
+                                ?>
+                                <?php echo build_options_from_map($ratings_for_options, $competency['rating']); ?>
                             </select>
                         </div>
                     </div>
 
-                    <div class="3u 12u$(medium) form-label"><label for="<?php echo $confidence_id?>">Strengthen Confidence</label></div>
+                    <div class="3u 12u$(medium) form-label"><label for="<?php echo $confidence_id?>">Positive examples</label></div>
                     <div class="9u$ 12u$(medium)">
                         <textarea name="<?php echo $confidence_id?>" id="<?php echo $confidence_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, that <?php echo $reviewee_name?> is doing well..."><?php echo $competency['good'] ?></textarea>
                     </div>
 
-                    <div class="3u 12u$(medium) form-label"><label for="<?php echo $effectiveness_id?>">Increase Effectiveness</label></div>
+                    <div class="3u 12u$(medium) form-label"><label for="<?php echo $effectiveness_id?>">Needs improvement</label></div>
                     <div class="9u$ 12u$(medium)">
                         <textarea name="<?php echo $effectiveness_id?>" id="<?php echo $effectiveness_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, along with some suggestions, that could help <?php echo $reviewee_name?> improve..."><?php echo $competency['bad'] ?></textarea>
                     </div>

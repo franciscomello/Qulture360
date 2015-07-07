@@ -83,6 +83,15 @@ INSERT INTO `competencies` (`name`, `description`, `owner_name`) VALUES
   ('Results Focus', 'Demonstrates concern for achieving or surpassing results against an internal or external standard of excellence. Shows a passion for improving the delivery of services with a commitment to continuous improvement.', 'all'),
   ('Teamwork', 'Demonstrates respect for the opinions of others. Identifies and pushes for win-win solutions to issues. Helps and supports fellow employees in their work to contribute to overall organizational success.', 'all');
 
+CREATE TABLE IF NOT EXISTS `competencies_grading` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `competency_id` int(11) NOT NULL,
+  `grade_position` int(11) NOT NULL DEFAULT '0',
+  `grade_text` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`,`competency_id`),
+  UNIQUE KEY `TRIPLET` (`competency_id`,`grade_position`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='To provide Custom Grading Texts' AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `survey` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
