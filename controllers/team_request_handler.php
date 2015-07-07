@@ -8,7 +8,7 @@ include_once MODELS_DIR . 'team.php';
 app\any("/team[/.*]", function ($req) {
     if(Session::is_inactive()) {
         set_flash_msg('error', 'You need to login to perform this action.');
-        return app\response_302('/auth/login?requested_url='.rawurlencode($_SERVER["REQUEST_URI"]));
+        return app\response_302(BASE_URL.'auth/login?requested_url='.rawurlencode($_SERVER["REQUEST_URI"]));
     }
     return app\next($req);
 });

@@ -18,12 +18,15 @@ app\post("/auth/login", function ($req) {
     $response = User::authenticate_user($req['form']);
     if ('success'!= $response)
         set_flash_msg('error', $response);
-    return app\response_302($req['form']['requested_url']);
+    $url_to_redirect = BASE_URL.$req['form']['requested_url'];
+    //$url_to_redirect = preg_replace("~\\\\+([\"\'\\x00\\\\])~", "$1", $url_to_redirect);
+    $url_to_redirect = rtrim($url_to_redirect, '/\\');
+    return app\response_302($url_to_redirect);
 });
 
 app\get("/auth/logout", function ($req) {
     User::logout();
-    return app\response_302('/');
+    return app\response_302(BASE_URL);
 });
 
 app\post("/auth/registration", function ($req) {
@@ -36,7 +39,7 @@ app\post("/auth/registration", function ($req) {
         $error_msg .= "<b>Error: $input</b>&nbsp;&nbsp;$error<br/>";
     }
     set_flash_msg('error', $error_msg);
-    return app\response_302('/auth/login');
+    return app\response_302(BASE_URL.'auth/login');
 });
 
 app\get("/auth/email-confirmation", function ($req) {
@@ -47,13 +50,13 @@ app\get("/auth/email-confirmation", function ($req) {
         $data = ['user_details'=>User::fetch_user_details('email', $query['email'])];
         return template\compose("auth/reset-password.html", compact('data'), "layout.html");
     }
-    return app\response_302('/auth/login');
+    return app\response_302(BASE_URL.'auth/login');
 });
 
 app\get("/auth/resend-verification-email", function ($req) {
     $results = User::resend_verification_email($req['query']);
     set_flash_msg($results[0], $results[1]);
-    return app\response_302('/auth/login');
+    return app\response_302(BASE_URL.'auth/login');
 });
 
 app\get("/auth/forgot-password", function ($req) {
@@ -73,7 +76,7 @@ app\get("/auth/reset-password", function ($req) {
     $results = User::process_password_reset_request($req['query']);
     if (is_array($results) && 'error' == current($results)) {
         set_flash_msg('error', $results[1]);
-        return app\response_302('/auth/forgot-password');
+        return app\response_302(BASE_URL.'auth/forgot-password');
     }
     $data['user_details'] = $results;
     return template\compose("auth/reset-password.html", compact('data'), "layout.html");
@@ -84,7 +87,7 @@ app\post("/auth/reset-password", function ($req) {
     $results = User::reset_password($form);
     set_flash_msg($results[0], $results[1]);
     if ('error' != $results[0])
-        return app\response_302('/auth/login');
+        return app\response_302(BASE_URL.'auth/login');
     $data = ['user_details'=>$form];
     return template\compose("auth/reset-password.html", compact('data'), "layout.html");
 });

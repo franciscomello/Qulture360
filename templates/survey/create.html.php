@@ -11,10 +11,10 @@ $competencies = $data['competencies'];
 
 <section class="wrapper style special fade">
     <div class="container">
-        <form action="/survey/create" id="theForm" method="post">
+        <form action="<?php echo BASE_URL;?>survey/create" id="theForm" method="post">
             <h2>Create a Survey</h2>
 
-            <p style="text-align: center">Please make sure you've read <a href="/#make_it_work" target="_blank">Make 360 Feedback Work</a>, before rolling this out!</p>
+            <p style="text-align: center">Please make sure you've read <a href="<?php echo BASE_URL;?>#make_it_work" target="_blank">Make 360 Feedback Work</a>, before rolling this out!</p>
 
             <div class="row uniform 50%">
                 <div class="3u 12u$(medium) form-label"><label for="name">Survey Name<sup>*</sup></label></div>
@@ -68,7 +68,7 @@ $competencies = $data['competencies'];
                 </div>
 
                 <div class="3u 12u$(medium)"></div>
-                <div class="3u 12u$(medium)"><a href="/" class="button cancel_button">Cancel</a></div>
+                <div class="3u 12u$(medium)"><a href="<?php echo BASE_URL;?>" class="button cancel_button">Cancel</a></div>
                 <div class="3u 12u$(medium)"><input type="submit" value="Create" class="button special" /></div>
                 <div class="3u$ 12u$(medium)"></div>
             </div>
@@ -96,7 +96,7 @@ $competencies = $data['competencies'];
         if(competencyName != '') {
             $.ajax({
                 type: 'POST',
-                url: '/survey/add-new',
+                url: base_url+'survey/add-new',
                 data: 'name='+competencyName+'&description='+competencyDescription,
                 success: function(data) {
                     location.reload();

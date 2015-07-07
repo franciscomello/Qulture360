@@ -1,12 +1,4 @@
 <?php
-define('BASE_PATH', __DIR__ . '/');
-define('CONTROLLER_DIR', dirname(__FILE__).'/controllers/');
-define('MODELS_DIR', dirname(__FILE__).'/models/');
-define('TEMPLATE_PATH', __DIR__ . '/templates/');
-define('VENDOR_PATH', __DIR__ . '/vendor/');
-define('MEEKRODB_PATH', VENDOR_PATH.'sergeytsalkov/meekrodb/');
-define('ASSETS_PATH', '/static');
-
 if ( ! function_exists('is_https'))
 {
 	/**
@@ -39,3 +31,11 @@ if ( ! function_exists('is_https'))
 $base_url = (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST']
 					.substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
 define('BASE_URL', $base_url);					
+
+define('BASE_PATH', __DIR__ . '/');
+define('CONTROLLER_DIR', dirname(__FILE__).'/controllers/');
+define('MODELS_DIR', dirname(__FILE__).'/models/');
+define('TEMPLATE_PATH', __DIR__ . '/templates/');
+define('VENDOR_PATH', __DIR__ . '/vendor/');
+define('MEEKRODB_PATH', VENDOR_PATH.'sergeytsalkov/meekrodb/');
+define('ASSETS_PATH', BASE_URL.'static');

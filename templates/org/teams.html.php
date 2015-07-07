@@ -16,8 +16,8 @@
                             <td><?php echo $team['team_name'] ?></td>
                             <td><?php echo date( 'jS F Y', strtotime($team['time'])) ?></td>
                             <td>
-                                <a href="/org/<?php echo $data['org_id'] ?>/team/<?php echo $team['team_id'] ?>/delete?name=<?php echo urlencode($team['team_name'])?>"><i class="icon fa-trash">&nbsp;</i></a>&nbsp;&nbsp;
-                                <a href="/org/<?php echo $data['org_id'] ?>/team/<?php echo $team['team_id'] ?>"><i class="icon fa-edit">&nbsp;</i></a>
+                                <a href="<?php echo BASE_URL;?>org/<?php echo $data['org_id'] ?>/team/<?php echo $team['team_id'] ?>/delete?name=<?php echo urlencode($team['team_name'])?>"><i class="icon fa-trash">&nbsp;</i></a>&nbsp;&nbsp;
+                                <a href="<?php echo BASE_URL;?>org/<?php echo $data['org_id'] ?>/team/<?php echo $team['team_id'] ?>"><i class="icon fa-edit">&nbsp;</i></a>
                             </td>
                         </tr>
                     <?php }?>
@@ -26,8 +26,8 @@
         </div>
         <div>
             <div class="button-row">
-                <a href="/org/<?php echo $data['org_id'] ?>/delete?name=<?php echo urlencode($data['org_name'])?>" class="button icon fa-trash">Delete This Org</a>
-                <a href="/org/<?php echo $data['org_id'] ?>/team/add?name=<?php echo urlencode($data['org_name'])?>" class="button special icon fa-plus-circle">Add New Team</a>
+                <a href="<?php echo BASE_URL;?>org/<?php echo $data['org_id'] ?>/delete?name=<?php echo urlencode($data['org_name'])?>" class="button icon fa-trash">Delete This Org</a>
+                <a href="<?php echo BASE_URL;?>org/<?php echo $data['org_id'] ?>/team/add?name=<?php echo urlencode($data['org_name'])?>" class="button special icon fa-plus-circle">Add New Team</a>
             </div>
             <div class="clear-row"></div>
         </div>

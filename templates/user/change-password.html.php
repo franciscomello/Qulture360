@@ -3,7 +3,7 @@
         <div class="alert alert-error" style="text-align: left;display: none;">
             <span>Confirmation Password does not match the Password entered.</span>
         </div>
-        <form action="/auth/reset-password" id="password-change-form" method="post">
+        <form action="<?php echo BASE_URL;?>auth/reset-password" id="password-change-form" method="post">
             <h2>Update Password</h2>
             <input name="email" type="hidden" value="<?php echo $data['email'];?>">
             <input name="activation_token" type="hidden" value="<?php echo $data['activation_token'];?>">

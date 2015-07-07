@@ -26,14 +26,14 @@
                             }
                         ?>
                         <input type="checkbox" id="<?php echo $unique_id ; ?>" name="<?php echo $reviewee_id; ?>[]" value="<?php echo $employ_id; ?>" <?php echo $checked; ?>>
-                        <label class="checkbox-label" for="<?php echo $unique_id; ?>"><a href="/user/<?php echo $employ_id; ?>" target="_blank"><?php echo $employ_name; ?></a></label>
+                        <label class="checkbox-label" for="<?php echo $unique_id; ?>"><a href="<?php echo BASE_URL;?>user/<?php echo $employ_id; ?>" target="_blank"><?php echo $employ_name; ?></a></label>
                     <?php } ?>
                     </div>
                 </div>
                 <?php } ?>
 
                 <div class="3u 12u$(medium)"></div>
-                <div class="3u 12u$(medium)"><a href="/" class="button cancel_button">Cancel</a></div>
+                <div class="3u 12u$(medium)"><a href="<?php echo BASE_URL;?>" class="button cancel_button">Cancel</a></div>
                 <div class="3u 12u$(medium)"><input type="submit" value="Assign" class="button special" /></div>
                 <div class="3u$ 12u$(medium)"></div>
             </div>

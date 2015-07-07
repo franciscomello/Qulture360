@@ -1,7 +1,7 @@
 <section class="wrapper style special fade">
     <div class="container 50%">
         <?php if (!empty($data) && array_key_exists('user_details', $data)) { ?>
-            <form action="/auth/reset-password" id="theForm" method="post" class="form-signin" align="left">
+            <form action="<?php echo BASE_URL;?>auth/reset-password" id="theForm" method="post" class="form-signin" align="left">
                 <h2>Reset Password</h2>
                 <input name="email" type="hidden" value="<?php echo $data['user_details']['email']; ?>">
                 <input name="activation_token" type="hidden" value="<?php echo $data['user_details']['activation_token']; ?>">
@@ -19,7 +19,7 @@
             </form>
             <?php include_once TEMPLATE_PATH. "inc/jquery_validator.php"; ?>
         <?php } else { ?>
-            <h2>Please <a href="/auth/login">login</a> first.</h2>
+            <h2>Please <a href="<?php echo BASE_URL;?>auth/login">login</a> first.</h2>
         <?php } ?>
     </div>
 </section>

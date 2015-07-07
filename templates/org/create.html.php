@@ -1,6 +1,6 @@
 <section class="wrapper style special fade">
     <div class="container">
-        <form action="/org/create" id="theForm" method="post">
+        <form action="<?php echo BASE_URL;?>org/create" id="theForm" method="post">
             <h2>Create a New Organisation</h2>
             <?php
             $requested_url = '/';
@@ -17,7 +17,7 @@
                 <?php include_once TEMPLATE_PATH . "org/inc/team_members_textarea.html.php"?>
 
                 <div class="3u 12u$(medium)"></div>
-                <div class="3u 12u$(medium)"><a href="/" class="button cancel_button">Cancel</a></div>
+                <div class="3u 12u$(medium)"><a href="<?php echo BASE_URL;?>" class="button cancel_button">Cancel</a></div>
                 <div class="3u 12u$(medium)"><input type="submit" value="Create" class="button special" /></div>
                 <div class="3u$ 12u$(medium)"></div>
             </div>

@@ -17,8 +17,8 @@
                         <td><?php echo $org['name'] ?></td>
                         <td><?php echo date('jS F Y', strtotime($org['time'])) ?></td>
                         <td>
-                            <a href="/org/<?php echo $org['id'] ?>/delete?name=<?php echo urlencode($org['name']) ?>"><i class="icon fa-trash">&nbsp;</i></a>&nbsp;&nbsp;
-                            <a href="/org/<?php echo $org['id'] ?>/team"><i class="icon fa-edit">&nbsp;</i></a>
+                            <a href="<?php echo BASE_URL;?>org/<?php echo $org['id'] ?>/delete?name=<?php echo urlencode($org['name']) ?>"><i class="icon fa-trash">&nbsp;</i></a>&nbsp;&nbsp;
+                            <a href="<?php echo BASE_URL;?>org/<?php echo $org['id'] ?>/team"><i class="icon fa-edit">&nbsp;</i></a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -27,7 +27,7 @@
         </div>
         <div>
             <div class="button-row">
-                <a href="/org/create" class="button special icon fa-plus-circle">Add New Org</a>
+                <a href="<?php echo BASE_URL;?>org/create" class="button special icon fa-plus-circle">Add New Org</a>
             </div>
             <div class="clear-row"></div>
         </div>

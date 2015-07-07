@@ -2,7 +2,7 @@
     <div class="container">
         <h2>My Surveys</h2>
         <?php if(empty($data)) {?>
-            <h4>Looks like you've not created any surveys so far. <a href="/survey/create">Get started...</a></h4>
+            <h4>Looks like you've not created any surveys so far. <a href="<?php echo BASE_URL;?>survey/create">Get started...</a></h4>
         <?php } else { ?>
             <div class="table-wrapper">
                 <table class="alt">
@@ -23,8 +23,8 @@
                                 <td><?php echo $survey['team_name'] ?></td>
                                 <td><?php echo date( 'jS F Y', strtotime($survey['created'])) ?></td>
                                 <td>
-                                    <a href="/survey/<?php echo $survey['id'] ?>/overview" alt="View" title="View"><i class="icon fa-dashboard">&nbsp;</i></a>
-                                    <a href="/survey/<?php echo $survey['id'] ?>/edit-reviewers" alt="Edit Reviewers" title="Edit Reviewers"><i class="icon fa-users">&nbsp;</i></a>
+                                    <a href="<?php echo BASE_URL;?>survey/<?php echo $survey['id'] ?>/overview" alt="View" title="View"><i class="icon fa-dashboard">&nbsp;</i></a>
+                                    <a href="<?php echo BASE_URL;?>survey/<?php echo $survey['id'] ?>/edit-reviewers" alt="Edit Reviewers" title="Edit Reviewers"><i class="icon fa-users">&nbsp;</i></a>
                                 </td>
                             </tr>
                         <?php } ?>

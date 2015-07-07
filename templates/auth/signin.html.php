@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row uniform 50%">
             <div class="6u 12u$(medium)">
-                <form action="/auth/login" method="post">
+                <form action="<?php echo BASE_URL;?>auth/login" method="post">
                     <h2>Login</h2>
                     <?php
                         $requested_url = '/';
@@ -23,13 +23,13 @@
                         <div class="4u$ 12u$(medium)"></div>
 
                         <div class="4u 12u$(medium)"></div>
-                        <div class="4u 12u$(medium)" style="text-align: center"><a href="/auth/forgot-password" class="fit" style="color: #ffffff">Forgot Password?</a></div>
+                        <div class="4u 12u$(medium)" style="text-align: center"><a href="<?php echo BASE_URL;?>auth/forgot-password" class="fit" style="color: #ffffff">Forgot Password?</a></div>
                         <div class="4u$ 12u$(medium)"></div>
                     </div>
                 </form>
             </div>
             <div class="6u$ 12u$(medium)">
-                <form id="theForm" action="/auth/registration" method="post">
+                <form id="theForm" action="<?php echo BASE_URL;?>auth/registration" method="post">
                     <h2>Register</h2>
                     <div class="row uniform 50%">
                         <div class="4u 12u$(medium)"><label for="name" class="form-label">Name<sup>*</sup></label></div>

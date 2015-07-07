@@ -143,7 +143,7 @@
         </div>
         <footer class="major">
             <ul class="actions">
-                <li><a href="/survey/create" class="button">Give it a Spin</a></li>
+                <li><a href="<?php echo BASE_URL;?>survey/create" class="button">Give it a Spin</a></li>
             </ul>
         </footer>
     </div>

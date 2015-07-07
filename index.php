@@ -39,15 +39,19 @@
     function meekrodb_setup(){
         include_once MEEKRODB_PATH.'db.class.php';
 
-        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-        /*$server = $url["host"];
-        $username = $url["user"];
-        $password = $url["pass"];
-        $db = substr($url["path"], 1);*/
-        $server = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'qulture';
+        if (strpos($_SERVER['SERVER_NAME'], 'localhost')===FALSE){
+            $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+            $server = $url["host"];
+            $username = $url["user"];
+            $password = $url["pass"];
+            $db = substr($url["path"], 1);
+        }else{
+            $server = 'localhost';
+            $username = 'root';
+            $password = '';
+            $db = 'qulture';            
+        }
+
         
         DB::$user = $username;
         DB::$password = $password;

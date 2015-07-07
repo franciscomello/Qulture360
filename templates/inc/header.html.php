@@ -17,9 +17,9 @@
     <script src="<?php echo BASE_URL;?>static/js/skel-layers.min.js"></script>
     <script src="<?php echo BASE_URL;?>static/js/init.js"></script>
     <noscript>
-        <link rel="stylesheet" href="static/css/skel.css" />
-        <link rel="stylesheet" href="static/css/style.css" />
-        <link rel="stylesheet" href="static/css/style-xlarge.css" />
+        <link rel="stylesheet" href="<?php echo BASE_URL;?>static/css/skel.css" />
+        <link rel="stylesheet" href="<?php echo BASE_URL;?>static/css/style.css" />
+        <link rel="stylesheet" href="<?php echo BASE_URL;?>static/css/style-xlarge.css" />
     </noscript>
     <!--[if lte IE 9]><link rel="stylesheet" href="/static/css/ie/v9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="/static/css/ie/v8.css" /><![endif]-->

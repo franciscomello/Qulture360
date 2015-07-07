@@ -4,7 +4,7 @@
         <h2><?php echo $data['title'] ?></h2>
         <?php $all_reviews = $data['reviews'];
         if (empty($all_reviews)) { ?>
-            <h4>Looks like you've not received any feedback so far. Check <a href="/review/received">your received feedback list</a>.</h4>
+            <h4>Looks like you've not received any feedback so far. Check <a href="<?php echo BASE_URL;?>review/received">your received feedback list</a>.</h4>
         <?php
         } else {
                 echo '<div id="graph" style="margin-bottom: 2em"></div>';

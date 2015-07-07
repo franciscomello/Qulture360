@@ -97,7 +97,7 @@ class User
             return 'Your credentials are correct. However, looks like you have not verified your email address.
             <br>Please check your inbox for the verification email, which was sent at the time of registration.
             <br>OR
-            <br>Request for a <a href="/auth/resend-verification-email?email=' . $email . '">new verification email</a>.';
+            <br>Request for a <a href="'.BASE_URL.'auth/resend-verification-email?email=' . $email . '">new verification email</a>.';
         self::set_user_data_session($user_details);
         return 'success';
     }

@@ -27,7 +27,7 @@
         <?php } ?>
         <div>
             <div class="button-row">
-                <a href="/org/create" class="button special icon fa-plus-circle">Add New Org</a>
+                <a href="<?php echo BASE_URL;?>org/create" class="button special icon fa-plus-circle">Add New Org</a>
             </div>
             <div class="clear-row"></div>
         </div>

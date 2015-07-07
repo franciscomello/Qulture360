@@ -10,7 +10,7 @@ $inputBioVal = $data['bio'];
 
 <section class="wrapper style fade">
     <div class="container">
-        <form action="/user/update-profile" id="theForm" method="post">
+        <form action="<?php echo BASE_URL;?>user/update-profile" id="theForm" method="post">
             <h2>Update Profile</h2>
             <input name="username" type="hidden" value="<?php echo $data['key'];?>">
             <input name="email" type="hidden" value="<?php echo $inputEmailVal;?>">
@@ -32,7 +32,7 @@ $inputBioVal = $data['bio'];
                 <div class="4u 12u$(medium) form-label"><label for="inputBio">Bio<sup>*</sup></label></div>
                 <div class="8u$ 12u$(medium)"><textarea name="inputBio" rows="10" id="inputBio" required><?php echo $inputBioVal; ?></textarea></div>
 
-                <div class="4u 12u$(medium)"><a href="/user/<?php echo $data['key'];?>" class="button cancel_button">Cancel</a> </div>
+                <div class="4u 12u$(medium)"><a href="<?php echo BASE_URL;?>user/<?php echo $data['key'];?>" class="button cancel_button">Cancel</a> </div>
                 <div class="8u$ 12u$(medium)"><input type="submit" value="Update Profile" class="special" /></div>
             </div>
         </form>
