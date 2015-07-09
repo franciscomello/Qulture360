@@ -39,12 +39,12 @@ $reviewee_name = $data['reviewee_name'];
 
                     <div class="3u 12u$(medium) form-label"><label for="<?php echo $confidence_id?>">Positive examples</label></div>
                     <div class="9u$ 12u$(medium)">
-                        <textarea name="<?php echo $confidence_id?>" id="<?php echo $confidence_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, that <?php echo $reviewee_name?> is doing well..."><?php echo $competency['good'] ?></textarea>
+                        <textarea name="<?php echo $confidence_id?>" id="<?php echo $confidence_id?>" placeholder="Describe at least one specific situation where <?php echo $competency_name ?> has demonstrated grasp of this skill/value, and what impact it had on the work being done."><?php echo $competency['good'] ?></textarea>
                     </div>
 
                     <div class="3u 12u$(medium) form-label"><label for="<?php echo $effectiveness_id?>">Needs improvement</label></div>
                     <div class="9u$ 12u$(medium)">
-                        <textarea name="<?php echo $effectiveness_id?>" id="<?php echo $effectiveness_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, along with some suggestions, that could help <?php echo $reviewee_name?> improve..."><?php echo $competency['bad'] ?></textarea>
+                        <textarea name="<?php echo $effectiveness_id?>" id="<?php echo $effectiveness_id?>" placeholder='No "Needs improvement": Describe at least one specific situation where <?php echo $competency_name ?> has failed to demonstrated grasp of this skill/value, what impact it had on the work being done, and how he can improve it.'><?php echo $competency['bad'] ?></textarea>
                     </div>
 
                     <div class="12u$ 12u$(medium)"><hr></div>
