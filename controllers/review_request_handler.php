@@ -7,6 +7,7 @@ use phpish\template;
 include_once MODELS_DIR . 'competencies.php';
 include_once MODELS_DIR . 'review.php';
 include_once MODELS_DIR . 'feedback.php';
+include_once MODELS_DIR . 'survey.php';
 
 app\any("/review[/.*]", function ($req) {
     if(Session::is_inactive()) {
@@ -58,6 +59,7 @@ app\get("/review/give/{id}", function ($req) {
     }
     $reviewee_name = Review::fetch_reviewee_name_for($review_id);
     $data = ['competencies'=> $competencies, 'ratings'=> Review::$ratings, 'reviewee_name'=>$reviewee_name, 'title'=>'Give', 'post_url'=>BASE_URL.'review/give/'.$review_id, 'cancel_url'=>BASE_URL.'review/pending'];
+    $data['default_competencies_instructions'] = Survey::$default_instructions;
     return template\compose("review/give_feedback.html", compact('data'), "layout.html");
 });
 
@@ -71,10 +73,19 @@ app\get("/review/update/{id}", function ($req) {
     $additional_data = ['ratings'=> Review::$ratings, 'title'=>'Update', 'post_url'=>BASE_URL.'review/update/'.$review_id, 'cancel_url'=>BASE_URL.'review/given'];
     $data = array_merge($data, $additional_data);
     $competencies = $data['competencies'];
+    $competencies_data = Review::fetch_competencies_for($review_id);
     foreach ($competencies as $key => $a_comp) {
         $competencies[$key]['full_data'] = Competencies::get_full_data($a_comp['competency_id']);
+        foreach ($competencies_data as $a_survey_competency_data) {
+            if ($a_comp['competency_id'] == $a_survey_competency_data['competency_id']){
+                $competencies[$key]['instructions_for_good'] = $a_survey_competency_data['instructions_for_good'];
+                $competencies[$key]['instructions_for_bad'] = $a_survey_competency_data['instructions_for_bad'];
+                break;
+            }
+        }
     }
     $data['competencies'] = $competencies;
+    $data['default_competencies_instructions'] = Survey::$default_instructions;
     return template\compose("review/give_feedback.html", compact('data'), "layout.html");
 });
 

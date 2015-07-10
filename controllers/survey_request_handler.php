@@ -12,7 +12,8 @@ include_once MODELS_DIR . 'team.php';
 app\any("/survey[/.*]", function ($req) {
     if(Session::is_inactive()) {
         set_flash_msg('error', 'You need to login to perform this action.');
-        return app\response_302(BASE_URL.'auth/login?requested_url='.rawurlencode($_SERVER["REQUEST_URI"]));
+        $url = $req['path'];
+        return app\response_302(BASE_URL.'auth/login?requested_url='.$url);
     }
     return app\next($req);
 });
@@ -24,12 +25,12 @@ app\get("/survey", function ($req) {
 
 app\any("/survey/create", function ($req) {
     if(Team::does_not_belong_to_any_org()) {
-        set_flash_msg('error', 'You need to be part of at least one organisation to perform this action.');
-        return app\response_302(BASE_URL.'org/create?requested_url='.rawurlencode($_SERVER["REQUEST_URI"]));
+        set_flash_msg('error', 'You need to be part of at least one organisation to perform this action.');        
+        return app\response_302(BASE_URL.'org/create?requested_url='.$req['path']);
     }
     if(Team::not_a_manager()) {
         set_flash_msg('error', 'You need to be a manager of at least one team to perform this action.');
-        return app\response_302(BASE_URL.'team/create?requested_url='.rawurlencode($_SERVER["REQUEST_URI"]));
+        return app\response_302(BASE_URL.'team/create?requested_url='.$req['path']);
     }
     return app\next($req);
 });
@@ -63,6 +64,35 @@ app\post("/survey/competency/{competency_id}/edit", function ($req) {
     set_flash_msg('success', 'Competencies Grading Updated');
     $data = ['competency_data' => Competencies::get_full_data($competency_id), 'default_grading' => Review::$ratings];
     return template\compose("survey/manage_competency_grading.html", compact('data'), "layout.html");
+});
+
+app\get("/survey/{id}/edit-competencies", function ($req) {
+    $survey_id = $req['matches']['id'];
+    $competencies = Survey::fetch_competencies_for($survey_id);
+    $survey_info = Survey::fetch_survey($survey_id);
+    if(empty($competencies)){
+        set_flash_msg('error', 'Sorry! There are no competencies identified for giving feedback in this survey. Please contact your manager.');
+        return app\response_302(BASE_URL."review/pending");
+    }
+    $data = ['competencies' => $competencies, 'default_instructions' => Survey::$default_instructions, 'survey_info' => $survey_info];
+    return template\compose("survey/manage_competency_instructions.html", compact('data'), "layout.html");
+});
+
+app\post("/survey/{id}/competency/{competency_id}/edit", function ($req) {
+    $competency_id = $req['matches']['competency_id'];
+    $survey_id = $req['matches']['id'];
+    $instructions = array();
+    if (isset($req['form']['using_customized_instructions'.$competency_id])){
+        //update, create
+        $instructions['good'] = $req['form']['instructions_good'];
+        $instructions['bad'] = $req['form']['instructions_bad'];        
+    }else{
+        $instructions['good'] = '';
+        $instructions['bad'] = '';
+    }
+    Survey::update_competency_instructions($survey_id,$competency_id,$instructions);
+    set_flash_msg('success', 'Competency Instructions Updated');
+    return app\response_302(BASE_URL."survey/$survey_id/edit-competencies");
 });
 
 app\post("/survey/create", function ($req) {

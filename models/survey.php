@@ -2,6 +2,12 @@
 
 class Survey
 {
+
+    public static $default_instructions = [
+                                'good'=> 'Highlight at least one specific instances with regards to __competency_name__, that __reviewee_name__ is doing well...',
+                                'bad'=> 'Highlight at least one specific instances with regards to __competency_name__, along with some suggestions, that could help __reviewee_name__ improve...'
+                            ];
+
     public static function create($form)
     {
         $required_fields = ['name' => 'Survey Name', 'org_id' => 'Org Name', 'team_id' => 'Team Name', 'competencies'=> 'Competencies'];
@@ -43,5 +49,31 @@ class Survey
     public static function is_owned_by($survey_id)
     {
         return Session::username() == self::owner($survey_id);
+    }
+
+    public static function fetch_competencies_for($survey_id){
+        return DB::query("SELECT survey_competencies.competency_id as id, 
+                                competencies.name as name, 
+                                competencies.description as description, 
+                                survey_competencies.instructions_for_good as instructions_for_good, 
+                                survey_competencies.instructions_for_bad as instructions_for_bad 
+                                FROM survey_competencies 
+                                INNER JOIN competencies on survey_competencies.competency_id=competencies.id 
+                                WHERE survey_competencies.survey_id = %i ", $survey_id);
+    }
+
+    public static function fetch_survey($survey_id){
+        return DB::queryFirstRow("select * from survey where survey.id=%i", $survey_id);
+    }
+
+    public static function update_competency_instructions($survey_id,$competency_id,$instructions){
+        $instructions_for_good = $instructions['good'];
+        $instructions_for_bad = $instructions['bad'];
+        return DB::query("UPDATE survey_competencies SET 
+                            instructions_for_good = %s, 
+                            instructions_for_bad = %s 
+                            WHERE survey_id = %i 
+                            AND competency_id = %i",
+                            $instructions_for_good, $instructions_for_bad, $survey_id, $competency_id);
     }
 }

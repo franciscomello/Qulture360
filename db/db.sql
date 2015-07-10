@@ -114,6 +114,8 @@ CREATE TABLE IF NOT EXISTS `survey_competencies` (
   UNIQUE KEY `survey_competency_id` (`survey_id`, `competency_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
 
+ALTER TABLE `survey_competencies` ADD COLUMN `instructions_for_good` VARCHAR(500) NOT NULL  AFTER `created` , ADD COLUMN `instructions_for_bad` VARCHAR(500) NOT NULL  AFTER `instructions_for_good` ;
+
 CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `survey_id` int(11) NOT NULL,

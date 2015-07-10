@@ -14,6 +14,22 @@ $reviewee_name = $data['reviewee_name'];
                     $rating_id = $competency_id.'_rating';
                     $confidence_id = $competency_id.'_good';
                     $effectiveness_id = $competency_id.'_bad';
+
+                    $default_instructions_good = $data['default_competencies_instructions']['good'];
+                    $default_instructions_bad = $data['default_competencies_instructions']['bad'];
+
+                    if ($competency['instructions_for_good']!= '' OR $competency['instructions_for_bad']!= ''){
+                        $default_instructions_good = $competency['instructions_for_good'];
+                        $default_instructions_bad = $competency['instructions_for_bad'];
+                    }
+
+                    $default_instructions_good = str_replace('__competency_name__', $competency['name'], $default_instructions_good);
+                    $default_instructions_good = str_replace('__reviewee_name__', $reviewee_name, $default_instructions_good);
+
+                    $default_instructions_bad = str_replace('__competency_name__', $competency['name'], $default_instructions_bad);
+                    $default_instructions_bad = str_replace('__reviewee_name__', $reviewee_name, $default_instructions_bad);
+
+
                 ?>
                     <div class="12u$ 12u$(medium)"><b><?php echo $competency_name . "</b>: ". $competency['description']?></div>
 
@@ -39,12 +55,12 @@ $reviewee_name = $data['reviewee_name'];
 
                     <div class="3u 12u$(medium) form-label"><label for="<?php echo $confidence_id?>">Positive examples</label></div>
                     <div class="9u$ 12u$(medium)">
-                        <textarea name="<?php echo $confidence_id?>" id="<?php echo $confidence_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, that <?php echo $reviewee_name?> is doing well..."><?php echo $competency['good'] ?></textarea>
+                        <textarea name="<?php echo $confidence_id?>" id="<?php echo $confidence_id?>" placeholder="<?php echo $default_instructions_good ?>"><?php echo $competency['good'] ?></textarea>
                     </div>
 
                     <div class="3u 12u$(medium) form-label"><label for="<?php echo $effectiveness_id?>">Needs improvement</label></div>
                     <div class="9u$ 12u$(medium)">
-                        <textarea name="<?php echo $effectiveness_id?>" id="<?php echo $effectiveness_id?>" placeholder="Highlight at least one specific instances with regards to <?php echo $competency_name ?>, along with some suggestions, that could help <?php echo $reviewee_name?> improve..."><?php echo $competency['bad'] ?></textarea>
+                        <textarea name="<?php echo $effectiveness_id?>" id="<?php echo $effectiveness_id?>" placeholder="<?php echo $default_instructions_bad ?>"><?php echo $competency['bad'] ?></textarea>
                     </div>
 
                     <div class="12u$ 12u$(medium)"><hr></div>

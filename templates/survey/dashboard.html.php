@@ -25,6 +25,7 @@
                                 <td>
                                     <a href="<?php echo BASE_URL;?>survey/<?php echo $survey['id'] ?>/overview" alt="View" title="View"><i class="icon fa-dashboard">&nbsp;</i></a>
                                     <a href="<?php echo BASE_URL;?>survey/<?php echo $survey['id'] ?>/edit-reviewers" alt="Edit Reviewers" title="Edit Reviewers"><i class="icon fa-users">&nbsp;</i></a>
+                                    <a href="<?php echo BASE_URL;?>survey/<?php echo $survey['id'] ?>/edit-competencies" alt="Edit Competencies Instructions" title="Edit Competencies Instructions"><i class="icon fa-pencil-square-o">&nbsp;</i></a>
                                 </td>
                             </tr>
                         <?php } ?>
