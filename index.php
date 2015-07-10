@@ -48,8 +48,8 @@
         }else{
             $server = 'localhost';
             $username = 'root';
-            $password = '';
-            $db = 'qulture';            
+            $password = 'vertrigo';
+            $db = 'qulture360';            
         }
 
         
@@ -64,10 +64,10 @@
 
     app\any('.*', function($req) {
         session_start();
-        meekrodb_setup();
-        try {
+        meekrodb_setup();       
+        try {          
             return app\next($req);
-        } catch(MeekroDBException $e) {
+        } catch(MeekroDBException $e) {           
             set_flash_msg('error', $e->getMessage());
             return app\response_302("/");
         }

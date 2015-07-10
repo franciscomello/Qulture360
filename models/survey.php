@@ -4,8 +4,8 @@ class Survey
 {
 
     public static $default_instructions = [
-                                'good'=> 'Highlight at least one specific instances with regards to __competency_name__, that __reviewee_name__ is doing well...',
-                                'bad'=> 'Highlight at least one specific instances with regards to __competency_name__, along with some suggestions, that could help __reviewee_name__ improve...'
+                                'good'=> 'Describe at least one specific situation where __competency_name__ has demonstrated grasp of this skill/value, and what impact it had on the work being done.',
+                                'bad'=> 'No "Needs improvement": Describe at least one specific situation where __competency_name__ has failed to demonstrated grasp of this skill/value, what impact it had on the work being done, and how he can improve it.'
                             ];
 
     public static function create($form)
